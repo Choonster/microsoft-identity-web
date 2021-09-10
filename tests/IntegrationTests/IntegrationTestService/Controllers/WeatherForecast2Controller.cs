@@ -15,7 +15,7 @@ namespace IntegrationTestService.Controllers
     [ApiController]
     [Authorize(AuthenticationSchemes = TestConstants.CustomJwtScheme2)]
     [Route("SecurePage2")]
-    [RequiredScope("user_impersonation")]
+    [RequiredScopeAttribute2("user_impersonation")]
     public class WeatherForecast2Controller : ControllerBase
     {
         private readonly IDownstreamWebApi _downstreamWebApi;

@@ -14,7 +14,7 @@ namespace TodoListService.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
-    [RequiredScope("read")]
+    [RequiredScopeAttribute2("read")]
     public class TodoListController : Controller
     {
         // In-memory TodoList
@@ -50,7 +50,7 @@ namespace TodoListService.Controllers
         }
 
         [HttpDelete("{id}")]
-        [RequiredScope("write")]
+        [RequiredScopeAttribute2("write")]
         public void Delete(int id)
         {
             TodoStore.Remove(id);
@@ -58,7 +58,7 @@ namespace TodoListService.Controllers
 
         // POST api/values
         [HttpPost]
-        [RequiredScope("write")]
+        [RequiredScopeAttribute2("write")]
         public IActionResult Post([FromBody] Todo todo)
         {
             int id = TodoStore.Values.OrderByDescending(x => x.Id).FirstOrDefault().Id + 1;
@@ -70,7 +70,7 @@ namespace TodoListService.Controllers
 
         // PATCH api/values
         [HttpPatch("{id}")]
-        [RequiredScope("write")]
+        [RequiredScopeAttribute2("write")]
         public IActionResult Patch(int id, [FromBody] Todo todo)
         {
             if (id != todo.Id)

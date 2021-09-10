@@ -33,7 +33,7 @@ namespace SampleFunc
         }
 
         [FunctionName("SampleFunc")]
-        [RequiredScope("access_as_user")]
+        [RequiredScopeAttribute2("access_as_user")]
         public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req)
         {

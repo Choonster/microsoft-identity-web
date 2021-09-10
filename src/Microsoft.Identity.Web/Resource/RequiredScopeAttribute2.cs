@@ -1,28 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.AspNetCore.Authorization;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+using Microsoft.AspNetCore.Mvc;
 
 namespace Microsoft.Identity.Web.Resource
 {
-    internal class RequiredScopeAttribute : AuthorizeAttribute
+    /// <summary>
+    /// This attribute is used on a controller, pages, or controller actions
+    /// to declare (and validate) the scopes required by a web API. These scopes can be declared
+    /// in two ways: hardcoding them, or declaring them in the configuration. Depending on your
+    /// choice, use either one or the other of the constructors.
+    /// For details, see https://aka.ms/ms-id-web/required-scope-attribute.
+    /// </summary>
+    public class RequiredScopeAttribute2 : TypeFilterAttribute
     {
-        const string POLICY_PREFIX = "RequiredScope(";
-
-        public IEnumerable<string> AcceptedScopes {
-            get
-            {
-                string scopeString = Policy.Substring(POLICY_PREFIX.Length, Policy.IndexOf('|')- POLICY_PREFIX.Length);
-                return scopeString.Split(',');
-            }
-            set
-            {
-                // RequiredScope(User.Read,Mail.Read|
-                // RequiredScope(|AzureAd:Scope
-                Policy = $"{POLICY_PREFIX}{string.Join(",", AcceptedScopes)}|{RequiredScopesConfigurationKey}";
-            }
-        }
-
         /// <summary>
         /// Fully qualified name of the configuration key containing the required scopes (separated
         /// by spaces).
@@ -37,17 +28,8 @@ namespace Microsoft.Identity.Web.Resource
         /// </example>
         public string RequiredScopesConfigurationKey
         {
-            get
-            {
-                string scopeKey = Policy.Substring(Policy.IndexOf('|'));
-                return scopeKey;
-            }
-            set
-            {
-                // RequiredScope(User.Read,Mail.Read|
-                // RequiredScope(|AzureAd:Scope
-                Policy = $"{POLICY_PREFIX}{string.Join(",", AcceptedScopes)}|{RequiredScopesConfigurationKey}";
-            }
+            get { return string.Empty; }
+            set { Arguments = new object[] { new string[] { Constants.RequiredScopesSetting, value } }; }
         }
 
         /// <summary>
@@ -69,24 +51,22 @@ namespace Microsoft.Identity.Web.Resource
         /// </example>
         /// <seealso cref="M:RequiredScopeAttribute()"/> and <see cref="RequiredScopesConfigurationKey"/>
         /// if you want to express the required scopes from the configuration.
-        public RequiredScopeAttribute(params string[] acceptedScopes)
+        public RequiredScopeAttribute2(params string[] acceptedScopes)
+            : base(typeof(RequiredScopeFilter))
         {
-            AcceptedScopes = acceptedScopes;
+            Arguments = new object[] { acceptedScopes };
+            IsReusable = true;
         }
 
         /// <summary>
-        /// Default constructor.
+        /// Default constructor, to be used along with the <see cref="RequiredScopesConfigurationKey"/>
+        /// property when you want to get the scopes to validate from the configuration, instead
+        /// of hardcoding them in the code.
         /// </summary>
-        /// <example>
-        /// <code>
-        /// [RequiredScope(RequiredScopesConfigurationKey="AzureAD:Scope")]
-        /// class Controller : BaseController
-        /// {
-        /// }
-        /// </code>
-        /// </example>
-        public RequiredScopeAttribute()
+        public RequiredScopeAttribute2()
+            : base(typeof(RequiredScopeFilter))
         {
+            IsReusable = true;
         }
     }
 }

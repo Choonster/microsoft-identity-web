@@ -18,7 +18,7 @@ namespace TodoListService.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
-    [RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
+    [RequiredScopeAttribute2(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
     public class TodoListController : Controller
     {
         private readonly ITokenAcquisition _tokenAcquisition; // do not remove

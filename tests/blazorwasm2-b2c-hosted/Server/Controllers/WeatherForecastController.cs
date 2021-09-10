@@ -11,7 +11,7 @@ namespace blazorwasm2_b2c_hosted.Server.Controllers
     [Authorize]
     [ApiController]
     [Route("[controller]")]
-    [RequiredScope("user_impersonation")]
+    [RequiredScopeAttribute2("user_impersonation")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]

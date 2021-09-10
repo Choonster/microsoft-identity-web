@@ -13,7 +13,7 @@ namespace IntegrationTestService.Controllers
 {
     [ApiController]
     [Route("SecurePage")]
-    [RequiredScope("user_impersonation")]
+    [RequiredScopeAttribute2("user_impersonation")]
     public class WeatherForecastController : ControllerBase
     {
         private readonly IDownstreamWebApi _downstreamWebApi;

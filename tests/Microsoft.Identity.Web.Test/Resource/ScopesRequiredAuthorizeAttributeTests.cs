@@ -14,8 +14,8 @@ using Xunit;
 
 namespace Microsoft.Identity.Web.Test.Resource
 {
-    [RequiredScope(RequiredScopesConfigurationKey="AzureAd:Scopes")]
-    [RequiredScope(ScopeOne)]
+    [RequiredScopeAttribute2(RequiredScopesConfigurationKey="AzureAd:Scopes")]
+    [RequiredScopeAttribute2(ScopeOne)]
     public class ScopesRequiredAuthorizeAttributeTests
     {
         public const string ScopeOne = "scope1";
