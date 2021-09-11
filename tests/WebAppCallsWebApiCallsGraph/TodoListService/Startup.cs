@@ -72,8 +72,9 @@ namespace TodoListService
                     options.AddPolicy("foo", policyBuilder => 
                     {
                         // Extension metbod to read config, and call the code that needs to be be done.
-                        policyBuilder.RequireClaim("scp", "value");
-                        policyBuilder.RequireAssertion(context => { context.Succeed(); });
+                        //policyBuilder.RequireClaim("scp", "value");
+                        //policyBuilder.RequireAssertion(context => { context.Succeed(); });
+                        policyBuilder.RequireScope("access_as_user");
                     }));
             
             // Works with GRPC, Signal R, MVC.

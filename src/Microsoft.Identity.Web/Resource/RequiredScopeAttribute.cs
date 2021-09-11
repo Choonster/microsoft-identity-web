@@ -9,7 +9,7 @@ namespace Microsoft.Identity.Web.Resource
     [Authorize(Policy = "RequiredScope(|AzureAd:Scope")]
     [Authorize(Policy = "RequiredScope(User.Read")]
     */
-    internal class RequiredScopeAttribute : AuthorizeAttribute
+    public class RequiredScopeAttribute : AuthorizeAttribute
     {
         const string POLICY_PREFIX = "RequiredScope(";
 
