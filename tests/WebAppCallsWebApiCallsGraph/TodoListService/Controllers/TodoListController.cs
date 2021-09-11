@@ -16,7 +16,10 @@ using TodoListService.Models;
 
 namespace TodoListService.Controllers
 {
-    [Authorize]
+    /* equivalent 
+    [Authorize(Policy = "RequiredScope(|AzureAd:Scope")]
+    [Authorize(Policy = "RequiredScope(User.Read")]
+    */
     [Route("api/[controller]")]
     [RequiredScopeAttribute2(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
     public class TodoListController : Controller

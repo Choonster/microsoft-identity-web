@@ -67,6 +67,19 @@ namespace TodoListService
             services.AddControllers();
             services.AddSingleton<ILongRunningProcessContextFactory, LongRunningProcessContextFactory>();
 
+
+            services.AddAuthorization(options =>
+                    options.AddPolicy("foo", policyBuilder => 
+                    {
+                        // Extension metbod to read config, and call the code that needs to be be done.
+                        policyBuilder.RequireClaim("scp", "value");
+                        policyBuilder.RequireAssertion(context => { context.Succeed(); });
+                    }));
+            
+            // Works with GRPC, Signal R, MVC.
+            // Tests on all the.
+            // 
+
             // below code is how customers would use a proxy
             //services.Configure<AadIssuerValidatorOptions>(options => { options.HttpClientName = "cats"; });
             //services.AddHttpClient("cats", c =>

@@ -5,11 +5,16 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Microsoft.Identity.Web.Resource
 {
+    /* equivalent to:
+    [Authorize(Policy = "RequiredScope(|AzureAd:Scope")]
+    [Authorize(Policy = "RequiredScope(User.Read")]
+    */
     internal class RequiredScopeAttribute : AuthorizeAttribute
     {
         const string POLICY_PREFIX = "RequiredScope(";
 
-        public IEnumerable<string> AcceptedScopes {
+        public IEnumerable<string> AcceptedScopes
+        {
             get
             {
                 string scopeString = Policy.Substring(POLICY_PREFIX.Length, Policy.IndexOf('|')- POLICY_PREFIX.Length);
