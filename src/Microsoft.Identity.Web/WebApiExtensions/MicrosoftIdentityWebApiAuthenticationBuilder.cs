@@ -98,6 +98,7 @@ namespace Microsoft.Identity.Web
                        ccaOptionsMonitor,
                        ccaOptions) =>
                 {
+                    System.Diagnostics.Debugger.Break();
                     MergedOptions mergedOptions = mergedOptionsMonitor.Get(jwtBearerAuthenticationScheme);
 
                     MergedOptions.UpdateMergedOptionsFromConfidentialClientApplicationOptions(ccaOptions.Value, mergedOptions);

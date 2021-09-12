@@ -46,6 +46,7 @@ namespace Microsoft.Identity.Web
 
         internal static void UpdateMergedOptionsFromMicrosoftIdentityOptions(MicrosoftIdentityOptions microsoftIdentityOptions, MergedOptions mergedOptions)
         {
+            System.Diagnostics.Debugger.Break();
             mergedOptions.AccessDeniedPath = microsoftIdentityOptions.AccessDeniedPath;
             mergedOptions.AllowWebApiToBeAuthorizedByACL = microsoftIdentityOptions.AllowWebApiToBeAuthorizedByACL;
             mergedOptions.AuthenticationMethod = microsoftIdentityOptions.AuthenticationMethod;
@@ -251,6 +252,7 @@ namespace Microsoft.Identity.Web
 
         internal static void UpdateMergedOptionsFromConfidentialClientApplicationOptions(ConfidentialClientApplicationOptions confidentialClientApplicationOptions, MergedOptions mergedOptions)
         {
+            System.Diagnostics.Debugger.Break();
             mergedOptions.AadAuthorityAudience = confidentialClientApplicationOptions.AadAuthorityAudience;
             mergedOptions.AzureCloudInstance = confidentialClientApplicationOptions.AzureCloudInstance;
             if (string.IsNullOrEmpty(mergedOptions.AzureRegion) && !string.IsNullOrEmpty(confidentialClientApplicationOptions.AzureRegion))
@@ -303,6 +305,7 @@ namespace Microsoft.Identity.Web
 
         internal static void UpdateConfidentialClientApplicationOptionsFromMergedOptions(MergedOptions mergedOptions, ConfidentialClientApplicationOptions confidentialClientApplicationOptions)
         {
+            System.Diagnostics.Debugger.Break();
             confidentialClientApplicationOptions.AadAuthorityAudience = mergedOptions.AadAuthorityAudience;
             confidentialClientApplicationOptions.AzureCloudInstance = mergedOptions.AzureCloudInstance;
             if (string.IsNullOrEmpty(confidentialClientApplicationOptions.AzureRegion) && !string.IsNullOrEmpty(mergedOptions.AzureRegion))
@@ -353,6 +356,7 @@ namespace Microsoft.Identity.Web
 
         internal static void UpdateMergedOptionsFromJwtBearerOptions(JwtBearerOptions jwtBearerOptions, MergedOptions mergedOptions)
         {
+            System.Diagnostics.Debugger.Break();
             if (string.IsNullOrEmpty(mergedOptions.Authority) && !string.IsNullOrEmpty(jwtBearerOptions.Authority))
             {
                 mergedOptions.Authority = jwtBearerOptions.Authority;
